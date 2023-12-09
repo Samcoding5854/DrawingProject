@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/native.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/native.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/native.cpp",
+  "output": "CMakeFiles/Native.dir/native.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/ocr_clipper.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_clipper.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_clipper.cpp",
+  "output": "CMakeFiles/Native.dir/ocr_clipper.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/ocr_cls_process.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_cls_process.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_cls_process.cpp",
+  "output": "CMakeFiles/Native.dir/ocr_cls_process.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/ocr_crnn_process.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_crnn_process.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_crnn_process.cpp",
+  "output": "CMakeFiles/Native.dir/ocr_crnn_process.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/ocr_db_post_process.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_db_post_process.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_db_post_process.cpp",
+  "output": "CMakeFiles/Native.dir/ocr_db_post_process.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/ocr_ppredictor.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_ppredictor.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ocr_ppredictor.cpp",
+  "output": "CMakeFiles/Native.dir/ocr_ppredictor.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/ppredictor.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ppredictor.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/ppredictor.cpp",
+  "output": "CMakeFiles/Native.dir/ppredictor.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/predictor_input.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/predictor_input.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/predictor_input.cpp",
+  "output": "CMakeFiles/Native.dir/predictor_input.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/predictor_output.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/predictor_output.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/predictor_output.cpp",
+  "output": "CMakeFiles/Native.dir/predictor_output.cpp.o"
+},
+{
+  "directory": "/home/samarth5854/Desktop/Model/build",
+  "command": "/usr/bin/g++ -DNative_EXPORTS -I/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/../../../PaddleLite/cxx/include -isystem /home/samarth5854/anaconda3/envs/ModelEnv/include/opencv4  -ffast-math -Ofast -Os -fvisibility=hidden -fvisibility-inlines-hidden -fdata-sections -ffunction-sections -g -fPIC -o CMakeFiles/Native.dir/preprocess.cpp.o -c /home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/preprocess.cpp",
+  "file": "/home/samarth5854/Desktop/Model/PaddleOCR/deploy/android_demo/app/src/main/cpp/preprocess.cpp",
+  "output": "CMakeFiles/Native.dir/preprocess.cpp.o"
+}
+]

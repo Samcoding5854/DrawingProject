@@ -1,0 +1,4 @@
+names: [Diameter, Chamfer, Length, Radius, Total Runout, Runout, Thread, Perpendicularity,
+  Concentricity, Centrality, Parallelity, Angle, True Position, Thread(UNC), Flatness,
+  Roughness, GroupedRoughness]
+nc: 17

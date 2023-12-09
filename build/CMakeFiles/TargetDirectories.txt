@@ -1,0 +1,3 @@
+/home/samarth5854/Desktop/Model/build/CMakeFiles/Native.dir
+/home/samarth5854/Desktop/Model/build/CMakeFiles/edit_cache.dir
+/home/samarth5854/Desktop/Model/build/CMakeFiles/rebuild_cache.dir
