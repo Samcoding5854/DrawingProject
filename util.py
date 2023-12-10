@@ -187,8 +187,31 @@ def final_processed(img):
 
     return dilated_image
 
+from PIL import Image
+import cv2
+import numpy as np
 
+# Function to resize an image
+def resize_erode_image(image_path, target_height=800):
+    # Open the image using Pillow
+    image = Image.open(image_path)
 
+    # Calculate the target width to maintain the aspect ratio
+    aspect_ratio = image.width / image.height
+    target_width = int(target_height * aspect_ratio)
+
+    # Resize the image
+    resized_image = image.resize((target_width, target_height))
+
+    # Define a kernel (structuring element)
+    kernel = np.ones((12,12), np.uint8)
+
+    # Perform erosion
+    erosion_result = cv2.erode(resized_image, kernel, iterations=1)
+
+    cv2.imwrite(image_path, erosion_result)
+
+    return 
 
 
 
