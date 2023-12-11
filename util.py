@@ -9,7 +9,7 @@ import json
 
 
 def convert_PDF_to_Image(pdf_path):
-    pdf_images = convert_from_path(pdf_path)
+    pdf_images = convert_from_path(pdf_path,poppler_path=r"C:\Program Files\poppler-23.11.0\Library\bin")
 
     for idx in range(len(pdf_images)):
         pdf_images[idx].save('output_temp/pdfImage' +'.png', 'PNG')

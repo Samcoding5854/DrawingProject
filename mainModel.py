@@ -62,6 +62,8 @@ def Balooning_CSV_Generator(pdfPath ,APIChoice):
         output_path = os.path.join('output_temp', filename)
         cv2.imwrite(output_path, fin_processed)
 
+        ocr_texts = []
+        
         if ocrFlag == 0:
 
             ocr_texts = OCR_results(output_path)
@@ -73,29 +75,30 @@ def Balooning_CSV_Generator(pdfPath ,APIChoice):
                 text_result = ocr_model.ocr(output_path)
                 # print(text_result)
 
-
-                if not text_result or not any(text_result[0]):
-                    fileName = f'EmptyLabel_{x1}.jpg'
-                else:
+                if text_result and text_result[0] and text_result[0][0] and text_result[0][0][1]:
                     label = text_result[0][0][1][0]
                     dimensions_values = label
-                    # print(label)
+                else:
+                    # Handle the case where text_result is None
+                    print("OCR did not detect any text.")
+                    continue 
 
         elif ocrFlag == 1:        
 
             text_result = ocr_model.ocr(output_path)
             # print(text_result)
 
-
-            if not text_result or not any(text_result[0]):
-                fileName = f'EmptyLabel_{x1}.jpg'
-            else:
+            if text_result and text_result[0] and text_result[0][0] and text_result[0][0][1]:
                 label = text_result[0][0][1][0]
                 ocr_texts = label
-                # print(ocr_texts)
-                # Save the image using the label as the filename
+            else:
+                # Handle the case where text_result is None
+                print("OCR did not detect any text.")
+                continue
+            # print(ocr_texts)
+            # Save the image using the label as the filename
 
-                fileName = f'{ocr_texts}.jpg'
+            fileName = f'{ocr_texts}.jpg'
 
         error_values = ' '.join([text for text in ocr_texts if text.startswith(('+', '-', '±')) and len(text) > 1])
         
