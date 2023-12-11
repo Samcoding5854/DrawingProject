@@ -1,43 +1,22 @@
 from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
 import cv2
-import fitz  # PyMuPDF
 import numpy as np
-import re
-from PIL import Image, ImageDraw, ImageFont
 import requests
-import os
+from pdf2image import convert_from_path
 import json
 
 
-def convert_pdf_to_cv2_image_and_save(pdf_path, output_image_path, page_num=0, dpi=300):
-    """
-    Converts a specific page of a PDF to a cv2 image (numpy array) and saves it as a PNG file.
 
-    Args:
-        pdf_path (str): Path to the PDF file.
-        output_image_path (str): Path to save the output PNG image.
-        page_num (int): Page number to convert (starting from 0).
-        dpi (int): DPI (dots per inch) for rendering the PDF.
-    """
-    # Load the PDF document
-    pdf_document = fitz.open(pdf_path)
+def convert_PDF_to_Image(pdf_path):
+    pdf_images = convert_from_path(pdf_path)
 
-    # Load the specific page
-    page = pdf_document[page_num]
+    for idx in range(len(pdf_images)):
+        pdf_images[idx].save('output_temp/pdfImage' +'.png', 'PNG')
 
-    # Render the page as an image using Pillow
-    image = page.get_pixmap(matrix=fitz.Matrix(dpi / 72, dpi / 72))
-    pil_image = Image.frombytes("RGB", [image.width, image.height], image.samples)
 
-    # Convert the PIL image to a cv2 image
-    cv2_image = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
+    # print("Successfully converted PDF to images")
 
-    # Save the cv2 image as a PNG file
-    cv2.imwrite(output_image_path, cv2_image)
-
-    # Close the PDF document
-    pdf_document.close()
 
 
 def create_class_dataframes(results):
@@ -214,17 +193,6 @@ def resize_erode_image(image_path, target_height=800):
     return 
 
 
-
-# def filter_unwanted_characters(numeric_label):
-#     # Define the characters you want to filter out
-#     unwanted_characters = ['@','$']
-
-#     # Remove unwanted characters from the numeric_label
-#     filtered_label = ''.join(char for char in numeric_label if char not in unwanted_characters)
-
-#     return filtered_label
-
-
 from PIL import Image
 
 def ocr_space_file(filename, overlay=True, api_key='K84842733188957', language='eng'):
@@ -257,7 +225,7 @@ def OCR_results(fileName):
     test_file_response = ocr_space_file(filename=fileName)
 
     test_file_json = json.loads(test_file_response)
-    print(test_file_json)
+    # print(test_file_json)
     
     # Check if there are ParsedResults and TextOverlay in the response
     if "ParsedResults" in test_file_json and test_file_json["ParsedResults"]:
@@ -268,7 +236,7 @@ def OCR_results(fileName):
                 word_texts.append(word.get("WordText", ""))
 
         # Printing the extracted WordText values
-        print(word_texts)
+        # print(word_texts)
         return word_texts
     else:
         print("Error in OCR processing. Check the response for details.")

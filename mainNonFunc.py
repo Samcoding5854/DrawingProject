@@ -1,11 +1,13 @@
-from ultralytics import YOLO
 import cv2
-from util import draw_circle_with_number,create_class_dataframes,sort_Dimensionss,convert_to_csv,final_processed,replace_pm_with_plus_minus
+from util import draw_circle_with_number,create_class_dataframes,sort_Dimensionss,convert_to_csv,final_processed,OCR_results
 import pandas as pd
 import cv2
+import re
+
+from paddleocr import PaddleOCR
 import os
 import pandas as pd
-from paddleocr import PaddleOCR
+
 
 results = {}
 
@@ -15,18 +17,16 @@ project = rf.workspace().project("symbols-l8rn4")
 model = project.version(2).model
 
 
-PMdetector = YOLO('small+-ann.pt')
-
-picture = 'data/images/train/drawing2Images_B03145A (2)-3.png'
+picture = 'data/images/train/drawing2Images_b07828a (2)-1.png'
 results = {}
 image = cv2.imread(picture)  # Load the image using OpenCV
 
 detections = model.predict(picture, confidence=20, overlap=30).json()
 print(detections)
 model.predict(picture, confidence=20, overlap=30).save("prediction.jpg")
-overlay_image = cv2.imread('pmImage.png')
+# overlay_image = cv2.imread('pmImage.png')
 
-ocr_model = PaddleOCR(use_angle_cls = True, lang='en')
+# ocr_model = PaddleOCR(use_angle_cls = True, lang='en')
 
 detections_list = []  # Store all detections for the current image
 
@@ -42,61 +42,65 @@ for prediction in detections['predictions']:
     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
     print(x1, y1, x2, y2)
     detection_crop = image[y1:y2, x1:x2, :]
-
-    # PMrf = Roboflow(api_key="AgZPub3XxfVEcLiBvqgr")
-    # PMproject = PMrf.workspace().project("plus-minus")
-    # PMmodel = PMproject.version(3).model
-
-    # # infer on a local image
-    # PMdetections = PMmodel.predict(detection_crop, confidence=80, overlap=30).json()
-
-    # PMdetections = PMdetector(detection_crop, conf=0.3)
-
-    # if PMdetections and  PMdetections['predictions']:
-    #     for PMdetection in PMdetections['predictions']:
-    #         pmx1 = float(PMdetection['x']) - float(PMdetection['width']) / 2
-    #         pmx2 = float(PMdetection['x']) + float(PMdetection['width']) / 2
-    #         pmy1 = float(PMdetection['y']) - float(PMdetection['height']) / 2
-    #         pmy2 = float(PMdetection['y']) + float(PMdetection['height']) / 2       
-    #         # pmx1, pmy1, pmx2, pmy2, score, class_id = PMdetection
-    #         pmx1, pmy1, pmx2, pmy2 = int(pmx1), int(pmy1), int(pmx2), int(pmy2)
-            
-    #         # Calculate the dimensions of the bounding box
-    #         width = pmx2 - pmx1
-    #         height = pmy2 - pmy1
-            
-    #         imageBB = cv2.rectangle(detection_crop, (pmx1, pmy1), (pmx2, pmy2), (0, 255, 0), 2)
-
-    #         # # Resize the overlay image to match the bounding box dimensions
-    #         resized_overlay = cv2.resize(overlay_image, (width, height))
-
-    #         # Overlay the resized image on the original image within the bounding box
-    #         detection_crop[pmy1:pmy2, pmx1:pmx2] = resized_overlay
-    #         # cv2.imwrite(os.path.join('output_image') + str(pmx1) + '.jpg', detection_crop)
-    # else:
-    #     detection_crop = detection_crop
-
-
     fin_processed = final_processed(detection_crop)
-    text_result = ocr_model.ocr(fin_processed)
-    print("TEXTING RESULT:", text_result)
-    numeric_label = ""
-    if text_result is not None:
-        for item in text_result:
-            numeric_label = ""  # Reset numeric_label for each OCR result
-            for sub_item in item:
-                label = sub_item[1][0]
-                text_score = sub_item[1][1]
-                numeric_label += label
-                numeric_label = replace_pm_with_plus_minus(numeric_label)
+
+    filename = f'x1_{x1}.jpg'
+
+    output_path = os.path.join('output_images', filename)
+    cv2.imwrite(output_path, detection_crop)
+    ocr_texts = OCR_results(output_path)
+
+    # Separate elements containing '+', '-', or '±' into the 'error' column
+    # error_values = ' '.join([text for text in ocr_texts if text.startswith(('+', '-', '±'))])
+    # dimensions_values = ' '.join([text[1:] if text.startswith('$') else text for text in ocr_texts if not text.startswith(('+', '-', '±'))])
+    
 
 
-    # if numeric_label != "":
+    # error_values = ' '.join([text for text in ocr_texts if re.search(r'[+±-]\w', text)])
+    # dimensions_values = ' '.join([text[1:] if text.startswith('$') else text for text in ocr_texts if not re.search(r'[+±-]\w', text)])
+
+
+
+    if ocr_texts:
+        fileName = f'{ocr_texts}.jpg'
+    else:
+        ocr_model = PaddleOCR(use_angle_cls = True, lang='en')
+
+        text_result = ocr_model.ocr(output_path)
+        print(text_result)
+
+
+        if not text_result or not any(text_result[0]):
+            fileName = f'EmptyLabel_{x1}.jpg'
+        else:
+            label = text_result[0][0][1][0]
+            dimensions_values = label
+            print(label)
+
+            
+
+            # Save the image using the label as the filename
+            fileName = f'{label}.jpg'
+
+
+    error_values = ' '.join([text for text in ocr_texts if text.startswith(('+', '-', '±')) and len(text) > 1])
+    
+    dimensions_values = ' '.join([text[1:] if text.startswith('$') else text for text in ocr_texts if not text.startswith(('+', '-', '±')) or (text.startswith(('+', '-', '±')) and len(text) == 1)])
+
+    # Save the fin_processed image
+    output_Path = os.path.join('output_images', fileName)
+    cv2.imwrite(output_Path, detection_crop)
+    print(f"Processed image saved at: {output_Path}")
+
+    os.remove(output_path)
+    print(f"Original image deleted: {output_path}")
+
+    
     detection_dict = {'class_id': class_id,
-                        'bbox': [x1, y1, x2, y2],
-                        'text': numeric_label,
-                        'bbox_score': score,
-                        'text_score': text_score}
+                      'bbox': [x1, y1, x2, y2],
+                      'bbox_score': score,
+                      'error': error_values,
+                      'dimensions': dimensions_values}
     
     detections_list.append(detection_dict)
 
@@ -156,5 +160,4 @@ number_column_name = "Serial Number"  # Replace with the name of the column cont
 
 
 draw_circle_with_number(picture, combined_df, center_column_name, number_column_name,"outputimg.png")
-
 
